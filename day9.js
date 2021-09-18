@@ -515,3 +515,23 @@ for (var i = 1 ; i < 6; i++) {
 }
 
 >>>>>>> 355ded9a9e78b6f39a2271913217f6e8931de3ef
+/*
+
+Operator	Example	Same As
+=	x = y	x = y
++=	x += y	x = x + y
+-=	x -= y	x = x - y
+*=	x *= y	x = x * y
+/=	x /= y	x = x / y
+%=	x %= y	x = x % y
+**=	x **= y	x = x ** y
+
+*/
+
+// Setup
+var myArray = [];
+
+// Only change code below this line
+for (var i = 1 ; i < 6; i++) {
+  myArray.push(i);
+}
