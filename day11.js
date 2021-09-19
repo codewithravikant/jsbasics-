@@ -227,10 +227,147 @@ format used in findGreaterOrEqual - to check if a number is positive, negative o
   
   */
 
-
+ function checkSign(num) {
+  return num > 0? "positive" : num <0 ?"negative" : "zero";
+  }
+  
+  checkSign(10);
 
 
   /*
-  
+  Use Recursion to Create a Countdown
+In a previous challenge, you learned how to use recursion to replace a for loop. Now, 
+let's look at a more complex function that returns an array of consecutive integers starting with 1 
+through the number passed to the function.
+
+As mentioned in the previous challenge, there will be a base case. The base case tells the recursive 
+function when it no longer needs to call itself. It is a simple case where the return value is already known. 
+There will also be a recursive call which executes the original function with different arguments.
+ If the function is written correctly, eventually the base case will be reached.
+
+For example, say you want to write a recursive function that returns an array containing the numbers 1 
+through n. This function will need to accept an argument, n, representing the final number. Then it will 
+need to call itself with progressively smaller values of n until it reaches 1. You could 
+write the function as follows:
+
+function countup(n) {
+  if (n < 1) {
+    return [];
+  } else {
+    const countArray = countup(n - 1);
+    countArray.push(n);
+    return countArray;
+  }
+}
+console.log(countup(5));
+The value [1, 2, 3, 4, 5] will be displayed in the console.
+
+At first, this seems counterintuitive since the value of n decreases, but the values in
+ the final array are increasing. This happens because the push happens last, after the 
+ recursive call has returned. At the point where n is pushed into the array, countup(n - 1)
+  has already been evaluated and returned [1, 2, ..., n - 1].
+
+We have defined a function called countdown with one parameter (n). The function should use 
+recursion to return an array containing the integers n through 1 based on the n parameter. 
+If the function is called with a number less than 1, the function should return an empty array.
+ For example, calling this function with n = 5 should return the array [5, 4, 3, 2, 1]. 
+ Your function must use recursion by calling itself and must not use loops of any kind.
   
   */
+// Only change code below this line
+function countdown(n){
+  if (n < 1) {
+    return [];
+  } else {
+    const arr = countdown(n - 1);
+    arr.unshift(n);
+    return arr;
+  }
+}
+console.log(countdown(10));
+
+function countdown(n) {
+  if (n < 1) {
+    return [];
+  } else {
+    const arr = countdown(n - 1);
+    arr.splice(0, 0, n);
+    return arr;
+  }
+}
+
+function countdown(n){
+  return n < 1 ? [] : [n].concat(countdown(n - 1));
+}
+
+function countdown(n){
+  return n < 1 ? [] : [n, ...countdown(n - 1)];
+}
+// Only change code above this line
+
+/*
+Use Recursion to Create a Range of Numbers
+Continuing from the previous challenge, we provide you another opportunity 
+to create a recursive function to solve a problem.
+We have defined a function named rangeOfNumbers with two parameters. 
+The function should return an array of integers which begins with a number 
+represented by the startNum parameter and ends with a number represented by the 
+endNum parameter. The starting number will always be less than or equal to the ending number.
+ Your function must use recursion by calling itself and not use loops of any kind. It should also work 
+ for cases where both startNum and endNum are the same.
+*/
+function rangeOfNumbers(startNum, endNum) {
+  if (endNum - startNum === 0) {
+    return [startNum];
+  } else {
+    var numbers = rangeOfNumbers(startNum, endNum - 1);
+    numbers.push(endNum);
+    return numbers;
+  }
+}
+
+function rangeOfNumbers(startNum, endNum) {
+  return startNum === endNum
+    ? [startNum]
+    : rangeOfNumbers(startNum, endNum - 1).concat(endNum);
+}
+
+function rangeOfNumbers(startNum, endNum) {
+  return startNum === endNum
+    ? [startNum]
+    : [...rangeOfNumbers(startNum, endNum - 1), endNum ];
+}
+
+/*
+
+Explore Differences Between the var and let Keywords
+One of the biggest problems with declaring variables with the var 
+keyword is that you can overwrite variable declarations without an error.
+
+var camper = 'James';
+var camper = 'David';
+console.log(camper);
+Here the console will display the string David.
+
+As you can see in the code above, the camper variable is originally declared as 
+James and then overridden to be David. In a small application, you might not run into 
+this type of problem, but when your code becomes larger, you might accidentally overwrite a
+ variable that you did not intend to overwrite. Because this behavior does not throw an error, 
+ searching and fixing bugs becomes more difficult.
+A new keyword called let was introduced in ES6 to solve this potential issue with the var keyword. 
+If you were to replace var with let in the variable declarations of the code above, the result would be an error.
+
+let camper = 'James';
+let camper = 'David';
+This error can be seen in the console of your browser. So unlike var, when using let,
+ a variable with the same name can only be declared once. Note the "use strict". This enables 
+ Strict Mode, which catches common coding mistakes and "unsafe" actions. For instance:
+
+"use strict";
+x = 3.14;
+This will display an error that x is not defined.
+
+Update the code so it only uses the let keyword.
+
+ */
+
